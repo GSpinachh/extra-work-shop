@@ -1,0 +1,53 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block css %}{% endblock css %}
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body>
+    <div class="header">
+        <div class="containerm">
+            <div class="header-line">
+                <div class="flex">
+                <a href="{% url "main:index" %}" class="header-logo">ShopSmart</a>
+
+                <ul class="menu">
+                    <li><a href="{% url "goods:categories" %}">Категории</a></li>
+                    <li><a href="{% url "goods:categories" %}">Одежда</a></li> 
+                </ul>
+                </div>
+                <!--Конец menu-->
+
+                <div class="search">
+                    <form action="{% url "goods:categories" %}" method="GET"> {% csrf_token %}
+                        <input type="text" placeholder="Поиск товара", name="q">
+                        <button>Найти</button>
+                    </form>
+                </div>
+                <!--Конец search-->
+
+                <div class="cart">
+                    <a href="{% url "cart:cart" %}">
+                        <img src="{% static "Images/Shop.png" %}" alt="">
+                    </a>
+                </div>
+                <!--Конец cart-->
+
+            </div>
+            <!--Конец header-line-->
+
+        </div>
+        <!--Конец container-->
+
+    </div>
+    <!--Конец header-->
+
+    {% block content %}{% endblock content %}
+</body>
+</html>

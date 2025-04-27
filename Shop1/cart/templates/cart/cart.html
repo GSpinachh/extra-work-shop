@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/cart.css" %}">
+    <title>Корзина</title>
+{% endblock css %}
+
+{% block content %}
+    <div class="container">
+        <h1>Ваша корзина</h1>
+        
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                    <th>Действие</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for CartItem in CartItems %}
+                <tr>
+                    <td>{{CartItem.Name}}</td>
+                    <td>{{CartItem.Price}} руб.</td>
+                    <td>
+                        <input type="number" value="{{CartItem.Amount}}" min="1" class="quantity-input">
+                    </td>
+                    <td class="item-total">{{CartItem.TotalPrice}} руб.</td>
+                    <th><form method="POST" type="Action">{% csrf_token %}
+                        <input type="hidden" name="ProdId" value="{{CartItem.Id}}">
+                        <input type="hidden" name="Action" value="Delete">
+                        <button>Удалить</button>
+                    </form></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="promo-code">
+            <h3>Промокод</h3>
+            <input type="text" placeholder="Введите промокод" class="promo-input">
+            <button class="apply-promo">Использовать</button>
+        </div>
+
+        <div class="order-summary">
+            <h3>Сумма заказа</h3>
+            <p>Итого: <span id="total-sum">{{TotalSum}}</span></p>
+        </div>
+        
+        <a class="checkout-button" href="{% url "cart:order" %}">
+            Оформить заказ</a>
+    </div>
+{% endblock content %}

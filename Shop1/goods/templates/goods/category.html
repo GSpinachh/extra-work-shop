@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+<title>Категории</title>
+<link rel="stylesheet" href="{% static "css/category.css" %}">
+{% endblock css %}
+
+
+{% block content %}
+<main>
+
+    <div class="container">
+
+        <aside class="side-bar">
+            <h2>Фильтрация</h2>
+            <div class="filter">
+                <h3>Цена</h3>
+                <input type="range" min="0" max="10000" value="5000">
+            </div>
+
+            <div class="filter">
+                <h3>Бренд</h3>
+                <label><input type="checkbox"> Berloto</label><br>
+                <label><input type="checkbox"> Celine</label><br>
+                <label><input type="checkbox"> Dior</label><br>
+                <label><input type="checkbox"> Dolce&Gabbana</label><br>
+                <label><input type="checkbox"> Emporio Armani</label><br>
+                <label><input type="checkbox"> Kiton</label><br>
+                <label><input type="checkbox"> Peserico</label><br>
+                <label><input type="checkbox"> Nom Ford</label><br>
+                <label><input type="checkbox"> Valentino</label><br>
+                <label><input type="checkbox"> Dior</label>
+            </div>
+
+            <div class="filter">
+                <h3>Размер</h3>
+                <label><input type="checkbox"> XXS</label><br>
+                <label><input type="checkbox"> XS</label><br>
+                <label><input type="checkbox"> S</label><br>
+                <label><input type="checkbox"> M</label><br>
+                <label><input type="checkbox"> L</label><br>
+                <label><input type="checkbox"> XL</label><br>
+                <label><input type="checkbox"> XXL</label>
+            </div>
+
+            <div class="filter">
+                <h3>Цвет</h3>
+                <label><input type="checkbox"> Чёрный</label><br>
+                <label><input type="checkbox"> Белый</label><br>
+                <label><input type="checkbox"> Красный</label><br>
+                <label><input type="checkbox"> Оранжевый</label><br>
+                <label><input type="checkbox"> Жёлтый</label><br>
+                <label><input type="checkbox"> Зеленый</label><br>
+                <label><input type="checkbox"> Синий</label><br>
+                <label><input type="checkbox"> Фиолетовый</label>
+            </div>
+
+            <button class="search-button">Найти</button>
+
+        </aside>
+
+        <section class="products">
+            <div class="sort">
+                <label>Сортировка по:</label>
+                <select>
+                    <option value="popularity">Популярность</option>
+                    <option value="price">Цена</option>
+                    <option value="newness">Новизна</option>
+                </select>
+            </div>
+            
+            <div class="product-list">
+                {% for Product in Products %}
+                <div class="product-item">
+                    <a href="{% url "goods:product" Product.id %}">
+                    <img src="{{Product.image.url}}" alt="">
+                    <h3>{{Product.name}}</h3>
+                    <p>Цена: {{Product.price}} руб.</p>
+                    <p>Рейтинг: {{Product.rating}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+{% endblock content %}
+

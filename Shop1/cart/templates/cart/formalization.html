@@ -1,0 +1,71 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/formalization.css" %}">
+    <title>Оформление заказа</title>
+{% endblock css %}
+
+{% block content %}
+    <div class="container">
+        <h1>Оформление заказа</h1>
+
+        <section class="cart-summary">
+            <h2>Список выбранных товаров</h2>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for CartItem in CartItems %}
+                    <tr>
+                        <td>{{CartItem.Name}}</td>
+                        <td>{{CartItem.Price}}</td>
+                        <td>{{CartItem.Amount}}</td>
+                        <td>{{CartItem.TotalPrice}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="order-summary">
+                <h3>Итого: <span id="total-sum">{{TotalSum}} руб.</span></h3>
+            </div>
+        </section>
+
+        <section class="contact-info">
+            <h2>Контактная информация</h2>
+            <input type="text" placeholder="Введите имя" required class="contact-input">
+            <input type="email" placeholder="Введите email" required class="contact-input">
+            <input type="tel" placeholder="Введите номер телефона" required class="contact-input">
+        </section>
+
+        <section class="delivery-method">
+            <h2>Способ доставки</h2>
+            <select class="delivery-select" required>
+                <option value="" disabled selected>Выберите способ доставки</option>
+                <option value="courier">Курьерская доставка</option>
+                <option value="pickup">Самовывоз</option>
+                <option value="post">Почта России</option>
+            </select>
+        </section>
+
+        <section class="payment-method">
+            <h2>Способ оплаты</h2>
+            <select class="payment-select" required>
+                <option value="" disabled selected>Выберите способ оплаты</option>
+                <option value="credit-card">Кредитная карта</option>
+                <option value="paypal">PayPal</option>
+                <option value="cod">Наличными при доставке</option>
+            </select>
+        </section>
+
+        <button class="checkout-button">Оформить заказ</button>
+    </div>
+{% endblock content %}

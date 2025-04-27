@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/home.css" %}">
+<title>ShopSmart</title>
+{% endblock css %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="header-down">
+            <div class="slider">
+                <h1 class="header-title">Популярные товары</h1>
+                <div class="slides"> 
+                    <img class="slide" src="{% static "Images/Sweater2.jpg" %}" alt="">
+                    <img class="slide" src="{% static "Images/Sweater.jpg" %}" alt="">
+                    <img class="slide" src="{% static "Images/Shirt2.jpg" %}" alt="">
+                </div>
+            </div>
+            <!--Конец slider-->
+
+            <div class="stock">
+                <h1 class="header-title">Акции и специальные предложения</h1>
+                <p class="header-text">
+                    Только с 18.10.24 по 19.10.24 скидка 10% на все куртки, худи и толстовки! Успейте купить!<br>
+                    На территории всех магазинов действует предложение! Приведи друга и получи нашу благодарность!
+                </p>
+            </div>
+            <!--Конец stock-->
+            
+        </div>
+        <!--Конец header-down-->
+
+    </div>
+
+</main>
+{% endblock content %}
+

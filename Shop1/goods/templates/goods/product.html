@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/product.css" %}">
+<title>Товар</title>
+{% endblock css %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="product-details">
+            
+            <div class="gallery">
+                <img src="{{product.image.url}}" alt="Подушка печенье" class="main-image">
+                <div class="thumbnail-images">
+                    <img src="{{product.image.url}}" alt="">
+                    <img src="{{product.image.url}}" alt="">
+                    <img src="{{product.image.url}}" alt="">
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1 class="product-title">{{product.name}}</h1>
+                <p class="product-price">Цена: {{product.price}} руб.</p>
+                <p class="product-description">
+                    {{product.description}}
+                </p>
+
+                <h3>Характеристики:</h3>
+                <ul class="specifications">
+                    <li>{{product.characteristics}}</li>
+                </ul>
+                <form method="GET">{% csrf_token %}
+                    <button class="add-to-cart">Добавить в корзину</button>
+                    <input type="hidden" name="ProdId" value="{{product.id}}">
+                    <input type="hidden" name="Action" value="Add">
+                    <input type="number" name="Quantity" value="1" min="1" class="quantity-input">
+                </form>
+                
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <h2>Отзывы</h2>
+            <div class="review">
+                <p><strong>Анастасия:</strong> Товар крутой. Приехал быстро, брак отсутствует</p>
+            </div>
+            <div class="review">
+                <p><strong>Николай:</strong> Пришло в срок, продавец отвечает быстро. Товар качественный, повреждений нет соответствует описанию и характеристикам.</p>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
